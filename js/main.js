@@ -4,33 +4,40 @@ let score, status, gameOverLabel;
 
 class Block {
   constructor(x, y) {
-    this.pos = { x: x * 150, y: y * 150 };
-    this.target = { x: x, y: y } // 移動先のマスの位置
+    this.pos = {x: x * 150, y: y * 150};
+    this.target = {x: x, y: y} // 移動先のマスの位置
     this.n = 0 // スコア
     if (Math.random() < 0.2) this.n++; // 20%の確率で初期値変更
     this.status = "stop";
     this.targetIndex = -1;
+    this.chars = ["🐭", "🐮", "🐯", "🐰", "🐲", "🐍", "🐴", "🐑", "🐵", "🐔", "🐶", "🐗"];
   }
 
   move() {
     const vx = Math.sign(this.target.x * 150 - this.pos.x) * 15;
     const vy = Math.sign(this.target.y * 150 - this.pos.y) * 15;
-    console.log(vx, vy, this.pos.x, this.pos.y);
-    this.pos = { x: this.pos.x + vx, y: this.pos.y + vy };
+    this.pos = {x: this.pos.x + vx, y: this.pos.y + vy};
     if ((vx === 0) && (vy === 0)) this.status = "stop";
   }
 
   draw() {
-    context.fillStyle = `hsl(${(this.n + 2) * 30}, 90%, 80%)`;
-    context.fillRect(this.pos.x, this.pos.y, 150, 150);
+    // 背景を描画
+    const grad = context.createRadialGradient(this.pos.x + 75, this.pos.y + 75, 30, this.pos.x + 75, this.pos.y + 75, 75);
+    grad.addColorStop(0.0, `hsl(${(this.n + 2) * 30}, 80%, 88%)`);
+    grad.addColorStop(1.0, `hsl(${(this.n + 2) * 30}, 90%, 80%)`);
+    context.fillStyle = grad;
+    context.fillRect(this.pos.x + 6, this.pos.y + 6, 138, 138);
+    // 絵文字を描画
     context.fillStyle = "#3f4144";
-    context.font = "bold 64px sans-serif";
+    context.font = "64px sans-serif";
     context.textAlign = "center";
-    const text = `${this.n + 1}`;
-    context.fillText(text, this.pos.x + 75, this.pos.y + 75);
+    const char = this.chars[this.n % this.chars.length];
+    context.fillText(char, this.pos.x + 75, this.pos.y + 80);
+    // nの表示
+    context.fillStyle = `hsl(${(this.n + 2) * 30}, 60%, 20%)`;
     context.font = "bold 32px sans-serif";
-    context.textAlign = "right";
-    context.fillText(this.n + 1, this.pos.x + 135, this.pos.y + 25);
+    context.textAlign = "centor";
+    context.fillText(this.n + 1, this.pos.x + 75, this.pos.y + 30);
   }
 }
 
@@ -42,7 +49,7 @@ const init = () => {
   document.addEventListener("keydown", (event) => {
     if (status !== "ready") return;
     const key = event.key;
-    const dir = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right" }[key];
+    const dir = {ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right"}[key];
     if (cntMoveBlocks(dir)) {
       status = "move"
     }
@@ -68,7 +75,7 @@ const addBlock = () => {
   // 空いているマスの位置
   for (let y = 0; y < 4; y++) {
     for (let x = 0; x < 4; x++) {
-      if (masu[y][x] === null) masu0.push({ x: x, y: y });
+      if (masu[y][x] === null) masu0.push({x: x, y: y});
     }
   }
   // ランダムにマスを選択
@@ -114,7 +121,6 @@ const cntMoveBlocks = (dir) => {
       if (masu[ty][tx] !== null) {
         cnt += moveBlocks(dir, tx, ty);
       }
-
     }
   }
   return cnt;
@@ -139,11 +145,11 @@ const moveBlocks = (dir, x, y) => {
     if (masu[ty][tx] === null) {
       masu[ty][tx] = masu[sy][sx];
       masu[sy][sx] = null;
-      block.target = { x: tx, y: ty };
+      block.target = {x: tx, y: ty};
       block.status = "move";
       cnt++;
     } else if ((block.n === target.n) && (target.targetIndex === -1)) {
-      block.target = { x: tx, y: ty };
+      block.target = {x: tx, y: ty};
       block.status = "move";
       block.targetIndex = masu[ty][tx];
       masu[ty][tx] = masu[sy][sx];
@@ -177,18 +183,18 @@ const update = () => {
       score += block.n;
     }
   }
+  // 枠線を描画
+  context.fillStyle = "#d2d6dd";
+  for (let i = 0; i < 5; i++) {
+    context.fillRect(0, i * 150 - 2, 600, 4);
+    context.fillRect(i * 150 - 2, 0, 4, 600);
+  }
   // 描画
   let moving = false;
   for (let i = 0; i < blocks.length; i++) {
     const block = blocks[i];
     if (block.status === "move") moving = true;
     if (block.status !== "dead") block.draw();
-  }
-  // 枠線を描画
-  context.fillStyle = "#3f4144";
-  for (let i = 0; i < 5; i++) {
-    context.fillRect(0, i * 150 - 2, 600, 4);
-    context.fillRect(i * 150 - 2, 0, 4, 600);
   }
   // 移動が完了したら新しいブロックを追加
   if (!moving && (status === "move")) {

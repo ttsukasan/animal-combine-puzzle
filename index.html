@@ -24,48 +24,52 @@
 </head>
 
 <body>
-  <main class="container">
-    <nav class="nav">
-      <div class="nav-left">
-        <a href="https://github.com/ttsukasan/animal-combine-puzzle">
-          <img height="32" width="32" src="https://unpkg.com/simple-icons@v9/icons/github.svg" />
-        </a>
-      </div>
-      <div class="nav-center">
-        <div class="brand">
-          <img src="img/shark.png">
-          パズル
-        </div>
-      </div>
-      <div class="nav-right">
-        <a id="initGameButton" href="#">リセット</a>
-      </div>
-    </nav>
-    <p class="text-center">
-      SCORE:
-      <span id="score" class="text-success">0</span>
-      <span id="gameOverLabel" class="text-error"></span>
-    </p>
-    <div class="text-center">
-      <canvas id="board" width="600" height="600" style="width: 480px; height: 480px"></canvas>
+<main class="container">
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="https://github.com/ttsukasan/animal-combine-puzzle">
+        <img height="32" width="32" src="https://unpkg.com/simple-icons@v9/icons/github.svg"/>
+      </a>
     </div>
-  </main>
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
+    <div class="nav-center">
+      <div class="brand">
+        <img src="img/shark.png">
+        干支パズル
+      </div>
+    </div>
+    <div class="nav-right">
+      <a id="initGameButton" href="#">リセット</a>
+    </div>
+  </nav>
+  <p class="text-center">
+    同じブロックを組み合わせて干支を進めよう！亥に到達したらクリアです<br>
+    矢印キー: タイルの移動（移動後に1もしくは2のタイルが追加されます）
+  </p>
+  <p class="text-center">
+    SCORE:
+    <strong id="score" class="text-success">0</strong>
+    <strong id="gameOverLabel" class="text-error"></strong>
+  </p>
+  <div class="text-center">
+    <canvas id="board" width="600" height="600" style="width: 480px; height: 480px; border: solid 3px #3f4144;"></canvas>
+  </div>
+</main>
+<script src="js/vendor/modernizr-3.11.2.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
 
-  <!--<script>-->
-  <!--  window.ga = function () {-->
-  <!--    ga.q.push(arguments)-->
-  <!--  };-->
-  <!--  ga.q = [];-->
-  <!--  ga.l = +new Date;-->
-  <!--  ga('create', 'UA-XXXXX-Y', 'auto');-->
-  <!--  ga('set', 'anonymizeIp', true);-->
-  <!--  ga('set', 'transport', 'beacon');-->
-  <!--  ga('send', 'pageview')-->
-  <!--</script>-->
-  <!--<script src="https://www.google-analytics.com/analytics.js" async></script>-->
+<!--<script>-->
+<!--  window.ga = function () {-->
+<!--    ga.q.push(arguments)-->
+<!--  };-->
+<!--  ga.q = [];-->
+<!--  ga.l = +new Date;-->
+<!--  ga('create', 'UA-XXXXX-Y', 'auto');-->
+<!--  ga('set', 'anonymizeIp', true);-->
+<!--  ga('set', 'transport', 'beacon');-->
+<!--  ga('send', 'pageview')-->
+<!--</script>-->
+<!--<script src="https://www.google-analytics.com/analytics.js" async></script>-->
 </body>
 
 </html>
