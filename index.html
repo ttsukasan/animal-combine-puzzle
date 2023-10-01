@@ -24,51 +24,48 @@
 </head>
 
 <body>
-<main class="container">
-  <h1>Header 1</h1>
-  <p>Contents <span class="text-primary">docs コンテンツ</span></p>
-  <hr>
-  <div>
-    <button id="initGameButton" type="button">initGame</button>
-    <span id="score">0</span>
-
-  </div>
-  <div>
-
-    <canvas id="board" width="600" height="600"></canvas>
-  </div>
-  <hr>
-
-  <div class="row">
-    <div class="col-3"></div>
-    <div class="col-6 text-center">
-      <img src="img/holds-a-book.jpg">
+  <main class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a href="https://github.com/ttsukasan/animal-combine-puzzle">
+          <img height="32" width="32" src="https://unpkg.com/simple-icons@v9/icons/github.svg" />
+        </a>
+      </div>
+      <div class="nav-center">
+        <div class="brand">
+          <img src="img/shark.png">
+          パズル
+        </div>
+      </div>
+      <div class="nav-right">
+        <a id="initGameButton" href="#">リセット</a>
+      </div>
+    </nav>
+    <p class="text-center">
+      SCORE:
+      <span id="score" class="text-success">0</span>
+      <span id="gameOverLabel" class="text-error"></span>
+    </p>
+    <div class="text-center">
+      <canvas id="board" width="600" height="600" style="width: 480px; height: 480px"></canvas>
     </div>
-  </div>
-  <p>
-  </p>
-  <div class="text-center">
-    <a href="https://github.com/ttsukasan/animal-combine-puzzle" class="button clear">
-      <img height="32" width="32" src="https://unpkg.com/simple-icons@v9/icons/github.svg"/>
-    </a>
-  </div>
-</main>
-<script src="js/vendor/modernizr-3.11.2.min.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
+  </main>
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
 
-<!--<script>-->
-<!--  window.ga = function () {-->
-<!--    ga.q.push(arguments)-->
-<!--  };-->
-<!--  ga.q = [];-->
-<!--  ga.l = +new Date;-->
-<!--  ga('create', 'UA-XXXXX-Y', 'auto');-->
-<!--  ga('set', 'anonymizeIp', true);-->
-<!--  ga('set', 'transport', 'beacon');-->
-<!--  ga('send', 'pageview')-->
-<!--</script>-->
-<!--<script src="https://www.google-analytics.com/analytics.js" async></script>-->
+  <!--<script>-->
+  <!--  window.ga = function () {-->
+  <!--    ga.q.push(arguments)-->
+  <!--  };-->
+  <!--  ga.q = [];-->
+  <!--  ga.l = +new Date;-->
+  <!--  ga('create', 'UA-XXXXX-Y', 'auto');-->
+  <!--  ga('set', 'anonymizeIp', true);-->
+  <!--  ga('set', 'transport', 'beacon');-->
+  <!--  ga('send', 'pageview')-->
+  <!--</script>-->
+  <!--<script src="https://www.google-analytics.com/analytics.js" async></script>-->
 </body>
 
 </html>
