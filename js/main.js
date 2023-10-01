@@ -2,7 +2,6 @@ let canvas, context;
 let masu, blocks;
 let score, status;
 
-
 class Block {
     constructor(x, y) {
         this.pos = {x: x * 150, y: y * 150};
@@ -26,7 +25,7 @@ class Block {
         context.fillStyle = "#000000";
         context.font = "bold 64px sans-serif";
         context.textAlign = "center";
-        const text = this.n + 1;
+        const text = `${this.n + 1} ${(~~Math.random() * 100)}`;
         context.fillText(text, this.pos.x + 75, this.pos.y + 75);
         context.font = "bold 32px sans-serif";
         context.textAlign = "right";
@@ -35,7 +34,6 @@ class Block {
 }
 
 const init = () => {
-    console.log("init")
     canvas = document.getElementById("board");
     context = canvas.getContext("2d");
     context.textBaseline = "middle";
@@ -120,11 +118,7 @@ const cntMoveBlocks = (dir) => {
     return cnt;
 }
 
-// moveBlocks ブロックを移動
-/// dir: 移動方向
-/// x, y: 移動開始位置
 const moveBlocks = (dir, x, y) => {
-    console.log("moveBlocks", dir, x, y);
     let cnt = 0;
     let check = false;
     // 現在の位置、移動方向、移動終了位置
@@ -149,20 +143,17 @@ const moveBlocks = (dir, x, y) => {
         } else if ((block.n === target.n) && (target.targetIndex === -1)) {
             block.target = {x: tx, y: ty};
             block.status = "move";
-            target.targetIndex = masu[ty][tx];
+            block.targetIndex = masu[ty][tx];
             masu[ty][tx] = masu[sy][sx];
             masu[sy][sx] = null;
-            cnt++;
+            cnt = cnt + 1;
             check = true;
         }
         [sx, sy] = [tx, ty];
         if (check) break; // 合体するブロックがあるなら繰り返し終了
     }
     return cnt
-
-
 }
-
 
 const update = () => {
     // ブロックの移動
@@ -179,7 +170,7 @@ const update = () => {
             // 合体先ブロックのステータスを dead に設定
             blocks[block.targetIndex].status = "dead";
             // 合体先ブロックのスコアを加算
-            block.n += 1;
+            block.n = block.n + 1;
             block.targetIndex = -1;
             score += block.n;
         }
@@ -193,7 +184,7 @@ const update = () => {
     }
     // 枠線を描画
     context.fillStyle = "#003300";
-    for(let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
         context.fillRect(0, i * 150 - 2, 600, 4);
         context.fillRect(i * 150 - 2, 0, 4, 600);
     }
