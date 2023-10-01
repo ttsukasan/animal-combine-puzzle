@@ -1,5 +1,7 @@
 # Animal Combine Puzzle
 
+<img src="./screenshot.png">
+
 週刊アスキー No.1458 参考
 
 https://ttsukasan.github.io/animal-combine-puzzle/
